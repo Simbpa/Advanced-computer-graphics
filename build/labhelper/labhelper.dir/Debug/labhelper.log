@@ -1,0 +1,17 @@
+﻿  Building Custom Rule C:/Users/Simon/Advanced-computer-graphics/labhelper/CMakeLists.txt
+  labhelper.cpp
+  Model.cpp
+  Generating Code...
+  fbo.cpp
+  hdr.cpp
+  imgui_impl_sdl.cpp
+  imgui_impl_opengl3.cpp
+  perf.cpp
+C:\Users\Simon\Advanced-computer-graphics\labhelper\perf.cpp(375,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Simon\Advanced-computer-graphics\labhelper\perf.cpp(382,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Simon\Advanced-computer-graphics\labhelper\perf.cpp(387,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Simon\Advanced-computer-graphics\labhelper\perf.cpp(392,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Simon\Advanced-computer-graphics\labhelper\perf.cpp(421,56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Simon\Advanced-computer-graphics\labhelper\perf.cpp(551,32): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  Generating Code...
+  labhelper.vcxproj -> C:\Users\Simon\Advanced-computer-graphics\build\labhelper\Debug\labhelper.lib

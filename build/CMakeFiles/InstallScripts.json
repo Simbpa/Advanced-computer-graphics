@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Simon/Advanced-computer-graphics/build/cmake_install.cmake",
+		"C:/Users/Simon/Advanced-computer-graphics/build/labhelper/cmake_install.cmake",
+		"C:/Users/Simon/Advanced-computer-graphics/build/labhelper/imgui/cmake_install.cmake",
+		"C:/Users/Simon/Advanced-computer-graphics/build/project/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
