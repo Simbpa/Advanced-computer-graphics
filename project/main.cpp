@@ -22,6 +22,7 @@ using namespace glm;
 #include "hdr.h"
 #include "fbo.h"
 
+#include "heightfield.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Various globals
@@ -81,6 +82,28 @@ mat4 roomModelMatrix;
 mat4 landingPadModelMatrix;
 mat4 fighterModelMatrix;
 
+
+///////////////////////////////////////////////////////////////////////////////
+// Hardcoded plane, temp
+///////////////////////////////////////////////////////////////////////////////
+float vertices[] = {
+	// positions        // normals (optional for now)
+	-0.5f, 0.0f, -0.5f,
+	 0.5f, 0.0f, -0.5f,
+	 0.5f, 0.0f,  0.5f,
+	-0.5f, 0.0f,  0.5f
+};
+
+unsigned int indices[] = {
+	0, 2, 1,   // first triangle
+	0, 3, 2    // second triangle
+};
+
+HeightField terrain;
+
+GLuint terrainVAO, terrainVBO, terrainEBO;
+
+
 void loadShaders(bool is_reload)
 {
 	GLuint shader = labhelper::loadShaderProgram("../project/simple.vert", "../project/simple.frag", is_reload);
@@ -131,6 +154,34 @@ void initialize()
 	///////////////////////////////////////////////////////////////////////
 	environmentMap = labhelper::loadHdrTexture("../scenes/envmaps/" + envmap_base_name + ".hdr");
 
+	///////////////////////////////////////////////////////////////////////
+	// Load heightfield, temp
+	///////////////////////////////////////////////////////////////////////
+
+	terrain.generateMesh(100);
+
+	/*
+	glGenVertexArrays(1, &terrainVAO);
+	glGenBuffers(1, &terrainVBO);
+	glGenBuffers(1, &terrainEBO);
+
+	glBindVertexArray(terrainVAO);
+
+	// VBO
+	glBindBuffer(GL_ARRAY_BUFFER, terrainVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	// EBO (indices)
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, terrainEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// position attribute (location = 0 in shader)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindVertexArray(0);
+	*/
+	
 
 	glEnable(GL_DEPTH_TEST); // enable Z-buffering
 	glEnable(GL_CULL_FACE);  // enables backface culling
@@ -201,6 +252,24 @@ void drawScene(GLuint currentShaderProgram,
 	                          inverse(transpose(viewMatrix * fighterModelMatrix)));
 
 	labhelper::render(fighterModel);
+
+	// draw heightfield, temp
+	mat4 modelMatrix = scale(vec3(100.0f));
+
+	labhelper::setUniformSlow(currentShaderProgram,
+		"modelViewProjectionMatrix",
+		projectionMatrix * viewMatrix * modelMatrix);
+
+	terrain.submitTriangles();
+	/*
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	glBindVertexArray(terrainVAO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	*/
 }
 
 
